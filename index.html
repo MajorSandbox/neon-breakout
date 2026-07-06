@@ -55,21 +55,28 @@
     }
     .hidden { display: none !important; }
 
-    /* ── Typo ── */
+    /* ── Typo ──
+       clamp() ties font sizes to viewport width so text doesn't overflow
+       on ultra-narrow screens (e.g. 20:9 / 21:9 phones) while staying at
+       full size on wider viewports. */
     h1 {
-      color: #00f2fe; font-size: 2.5rem; margin-bottom: 20px;
+      color: #00f2fe; font-size: clamp(1.6rem, 8vw, 2.5rem); margin-bottom: clamp(10px, 4vw, 20px);
       text-shadow: 0 0 15px #00f2fe, 0 0 30px #00f2fe;
-      letter-spacing: 2px; text-align: center;
+      letter-spacing: 2px; text-align: center; padding: 0 12px;
     }
-    p { color: #fff; font-size: 1.2rem; margin-bottom: 30px; text-align: center; opacity: 0.8; }
+    p {
+      color: #fff; font-size: clamp(0.9rem, 4.2vw, 1.2rem); margin-bottom: clamp(16px, 6vw, 30px);
+      text-align: center; opacity: 0.8; padding: 0 16px;
+    }
 
     /* ── Buttons ── */
     button {
       background: transparent; border: 2px solid #00f2fe;
-      color: #00f2fe; padding: 12px 35px;
-      font-size: 1.2rem; font-weight: bold; border-radius: 25px;
+      color: #00f2fe; padding: clamp(9px, 2.6vw, 12px) clamp(20px, 7vw, 35px);
+      font-size: clamp(0.95rem, 4vw, 1.2rem); font-weight: bold; border-radius: 25px;
       cursor: pointer; box-shadow: 0 0 10px rgba(0,242,254,0.4);
-      transition: all 0.2s ease; text-transform: uppercase; margin: 8px 0;
+      transition: all 0.2s ease; text-transform: uppercase; margin: clamp(5px, 1.6vw, 8px) 0;
+      max-width: 85vw; white-space: nowrap;
     }
     button:hover, button:active {
       background: #00f2fe; color: #080811; box-shadow: 0 0 20px #00f2fe;
@@ -84,11 +91,12 @@
 
     /* ── Burger menu button ── */
     #menuButton {
-      position: absolute; top: 20px; left: 20px;
-      width: 40px; height: 40px; z-index: 150;
+      position: absolute;
+      top: clamp(12px, 3.5vw, 20px); left: clamp(12px, 3.5vw, 20px);
+      width: clamp(34px, 9vw, 40px); height: clamp(34px, 9vw, 40px); z-index: 150;
       background: rgba(0,242,254,0.15); border: 1.5px solid #00f2fe; border-radius: 5px;
       cursor: pointer; display: flex; flex-direction: column;
-      justify-content: center; gap: 5px; padding: 10px;
+      justify-content: center; gap: 5px; padding: clamp(8px, 2.2vw, 10px);
       box-shadow: 0 0 10px rgba(0,242,254,0.2);
     }
     #menuButton span {
@@ -128,46 +136,64 @@
     .panel-active { left: 0 !important; }
 
     /* ── Highscore list ── */
-    .highscore-list { width: 85%; max-width: 360px; margin: 15px 0; list-style: none; }
+    .highscore-list { width: 90%; max-width: 360px; margin: clamp(10px, 3vw, 15px) 0; list-style: none; }
     .highscore-item {
       font-family: "Courier New", monospace; font-weight: bold;
-      color: #fff; font-size: 1.1rem; padding: 10px 0;
+      color: #fff; font-size: clamp(0.85rem, 3.6vw, 1.1rem); padding: clamp(6px, 2vw, 10px) 0;
       border-bottom: 1px dashed rgba(0,242,254,0.3);
-      display: flex; justify-content: space-between;
+      display: flex; justify-content: space-between; gap: 8px;
     }
     .highscore-item:first-child { color: #ffb300; text-shadow: 0 0 10px #ffb300; }
 
-    /* ── Einstellungen ── */
+    /* ── Settings ── */
     .setting-row {
-      width: 80%; max-width: 320px;
-      display: flex; flex-direction: column; align-items: center; margin: 15px 0;
+      width: 88%; max-width: 320px;
+      display: flex; flex-direction: column; align-items: center; margin: clamp(10px, 3vw, 15px) 0;
     }
-    .setting-label { color: #fff; font-size: 1.1rem; font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; }
+    .setting-label { color: #fff; font-size: clamp(0.85rem, 3.6vw, 1.1rem); font-weight: bold; margin-bottom: 10px; letter-spacing: 1px; text-align: center; }
     .palette-display {
-      display: flex; gap: 10px; background: rgba(255,255,255,0.05);
-      padding: 10px 20px; border-radius: 15px; border: 1px solid rgba(0,242,254,0.2);
+      display: flex; gap: clamp(6px, 2vw, 10px); background: rgba(255,255,255,0.05);
+      padding: clamp(8px, 2.5vw, 10px) clamp(12px, 4vw, 20px); border-radius: 15px; border: 1px solid rgba(0,242,254,0.2);
     }
-    .color-dot { width: 25px; height: 25px; border-radius: 5px; box-shadow: 0 0 8px rgba(255,255,255,0.2); }
+    .color-dot { width: clamp(18px, 5vw, 25px); height: clamp(18px, 5vw, 25px); border-radius: 5px; box-shadow: 0 0 8px rgba(255,255,255,0.2); }
     .setting-toggle-btn {
       width: 100%; max-width: 260px;
       display: flex; justify-content: space-between; align-items: center;
-      padding: 10px 20px; font-size: 1rem; border-radius: 15px; margin: 5px 0;
+      padding: clamp(8px, 2.5vw, 10px) clamp(14px, 4.5vw, 20px); font-size: clamp(0.8rem, 3.4vw, 1rem); border-radius: 15px; margin: 5px 0;
     }
     .toggle-indicator {
       width: 12px; height: 12px; border-radius: 50%;
       background: #555; box-shadow: 0 0 5px #555; transition: all 0.2s ease;
+      flex-shrink: 0;
     }
     .toggle-active { background: #39ff14 !important; box-shadow: 0 0 12px #39ff14, 0 0 20px #39ff14 !important; }
 
     /* ── Arcade name input ── */
-    .arcade-input-container { display: flex; gap: 15px; margin: 25px 0; }
+    .arcade-input-container { display: flex; gap: clamp(8px, 3vw, 15px); margin: clamp(16px, 5vw, 25px) 0; }
     .char-selector { display: flex; flex-direction: column; align-items: center; }
-    .char-btn { background: transparent; border: none; color: #00f2fe; font-size: 1.5rem; font-weight: bold; cursor: pointer; padding: 5px 10px; }
+    .char-btn { background: transparent; border: none; color: #00f2fe; font-size: clamp(1.2rem, 5vw, 1.5rem); font-weight: bold; cursor: pointer; padding: 5px 10px; }
     .char-display {
-      font-family: "Courier New", monospace; font-size: 2.2rem; font-weight: bold;
+      font-family: "Courier New", monospace; font-size: clamp(1.6rem, 7vw, 2.2rem); font-weight: bold;
       color: #fff; background: rgba(0,242,254,0.1); border: 1px solid #00f2fe;
-      width: 50px; height: 60px; display: flex; justify-content: center; align-items: center;
+      width: clamp(38px, 12vw, 50px); height: clamp(46px, 14vw, 60px); display: flex; justify-content: center; align-items: center;
       border-radius: 5px; text-shadow: 0 0 10px #00f2fe;
+    }
+
+    /* ─────────────────────────────────────────────────────────────────────
+       ULTRA-NARROW SCREENS (21:9 / 20:9 phones, portrait aspect ratio
+       roughly 9:19 or narrower). clamp() above already scales most text
+       down smoothly, but on these extreme aspect ratios the *container*
+       itself becomes width-constrained and quite narrow, so we tighten
+       vertical spacing further to avoid panel content feeling cramped
+       and to keep every button comfortably tappable.
+    ───────────────────────────────────────────────────────────────────── */
+    @media (max-aspect-ratio: 9/19) {
+      h1 { margin-bottom: 8px; letter-spacing: 1px; }
+      p  { margin-bottom: 14px; }
+      button { margin: 4px 0; }
+      .setting-row { margin: 8px 0; }
+      .arcade-input-container { margin: 12px 0; }
+      #menuButton { top: 10px; left: 10px; }
     }
   </style>
 </head>
@@ -184,6 +210,7 @@
     <button id="navToSettingsBtn">Settings</button>
     <button id="closeNavPanelBtn">Resume Game</button>
     <button id="newGameBtn" class="btn-danger">New Game</button>
+    <button id="mainMenuBtn" class="btn-danger">Main Menu</button>
   </div>
 
   <!-- ── Slide panel: Highscores ── -->
@@ -284,6 +311,8 @@
 </div>
 
 <script>
+'use strict';
+
 // Register Service Worker for Mobile PWA installation
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
@@ -291,7 +320,6 @@ if ('serviceWorker' in navigator) {
   });
 }
 
-'use strict';
 
 // ══════════════════════════════════════════════════════════════════════════════
 //  SECTION 1 – KONFIGURATION
@@ -498,11 +526,41 @@ document.getElementById('newGameBtn').addEventListener('click', () => {
   startGame();
 });
 
+// Returns fully to the title screen instead of jumping straight into a new game.
+// The running game (if any) is discarded; a fresh game only starts when the
+// player explicitly presses "Start Game" on the title screen.
+document.getElementById('mainMenuBtn').addEventListener('click', () => {
+  const hasProgress = gameState === 'PAUSED' && (score > 0 || currentLevel > 0);
+  if (hasProgress && !confirm('Really return to the main menu?\nYour current progress will be lost!')) {
+    return;
+  }
+  // Stop the game loop by leaving the PLAYING state
+  gameState = 'START';
+  balls = []; powerUps = []; lasers = []; particles = [];
+
+  DOM.navPanel.classList.remove('open');
+  DOM.menuButton.classList.remove('open-icon');
+  DOM.highscorePanel.classList.remove('panel-active');
+  DOM.settingsPanel.classList.remove('panel-active');
+  DOM.pauseScreen.classList.add('hidden');
+  DOM.gameOverScreen.classList.add('hidden');
+  DOM.victoryScreen.classList.add('hidden');
+  DOM.highscoreInputScreen.classList.add('hidden');
+  DOM.startScreen.classList.remove('hidden');
+});
+
 document.getElementById('navToHighscoresBtn').addEventListener('click', () => {
   displayHighscores(); DOM.highscorePanel.classList.add('panel-active');
 });
 document.getElementById('backFromHighscoresBtn').addEventListener('click', () => {
   DOM.highscorePanel.classList.remove('panel-active');
+  // If navPanel isn't open underneath, the highscore panel was opened
+  // directly after saving a new score (not via the burger menu) → go back
+  // to the title screen instead of leaving the player on a bare canvas.
+  if (!DOM.navPanel.classList.contains('open')) {
+    DOM.startScreen.classList.remove('hidden');
+    gameState = 'START';
+  }
 });
 document.getElementById('navToSettingsBtn').addEventListener('click', () => {
   updateSettingsUI(); DOM.settingsPanel.classList.add('panel-active');
@@ -585,8 +643,13 @@ document.getElementById('saveScoreButton').addEventListener('click', () => {
   localStorage.setItem(CFG.STORAGE_KEY, JSON.stringify(scores));
   DOM.highscoreInputScreen.classList.add('hidden');
   updateTickerText(); displayHighscores();
+  // Show the freshly updated leaderboard so the player can see where their
+  // score landed. Crucially we do NOT also open navPanel underneath (that
+  // was the earlier bug: navPanel's buttons became unreachable, hidden
+  // behind the higher z-index highscorePanel). backFromHighscoresBtn
+  // detects this exact situation (navPanel closed) and routes "Back" to
+  // the title screen instead of the main menu.
   DOM.highscorePanel.classList.add('panel-active');
-  DOM.navPanel.classList.add('open');
   gameState = 'START';
 });
 
@@ -661,6 +724,7 @@ function startGame() {
   initLevel(currentLevel);
   gameState = 'PLAYING';
   updateTickerText();
+  lastFrameTime = 0; // Avoid a dt jump on the very first frame of the new game
   requestAnimationFrame(gameLoop);
 }
 
@@ -699,6 +763,7 @@ function togglePause() {
     if (powerUpTimers.laser.active)      powerUpTimers.laser.end      += elapsed;
     gameState = 'PLAYING';
     DOM.pauseScreen.classList.add('hidden');
+    lastFrameTime = 0; // Avoid a dt jump on the first frame after resuming
     requestAnimationFrame(gameLoop);
   }
 }
@@ -794,11 +859,11 @@ function createComboExplosion(x, y, color, count, combo) {
 // ══════════════════════════════════════════════════════════════════════════════
 //  SECTION 12 – UPDATE (PHYSIK-LOOP)
 // ══════════════════════════════════════════════════════════════════════════════
-function update() {
+function update(dt) {
   const now = Date.now();
   const p   = PALETTES[activePaletteIndex];
 
-  tickerX -= 1.5; // Advance ticker (wrap check in draw())
+  tickerX -= 1.5 * dt; // Advance ticker (wrap check in draw()), frame-rate independent
 
   // Power-Up Timer
   if (powerUpTimers.widePaddle.active && now > powerUpTimers.widePaddle.end) {
@@ -814,9 +879,9 @@ function update() {
     powerUpTimers.laser.lastShot = now;
   }
 
-  // 1. Laser-Bewegung & Brick-Kollision
+  // 1. Laser movement & brick collision
   for (let i = lasers.length - 1; i >= 0; i--) {
-    const l = lasers[i]; l.y -= CFG.LASER_SPEED;
+    const l = lasers[i]; l.y -= CFG.LASER_SPEED * dt;
     let hit = false;
     for (let j = bricks.length - 1; j >= 0; j--) {
       const b = bricks[j];
@@ -838,19 +903,18 @@ function update() {
 
   // 2. Power-Up Items
   for (let i = powerUps.length - 1; i >= 0; i--) {
-    const pUp = powerUps[i]; pUp.y += CFG.PUP_SPEED;
+    const pUp = powerUps[i]; pUp.y += CFG.PUP_SPEED * dt;
     const caught = pUp.y+CFG.PUP_R >= paddle.y && pUp.y-CFG.PUP_R <= paddle.y+paddle.height &&
                    pUp.x >= paddle.x && pUp.x <= paddle.x+paddle.width;
     if (caught) {
       createExplosion(pUp.x, pUp.y, pUp.color, 20);
       if (pUp.type === 1) {
-	     // Falls der Hauptball noch klebt, schießen wir ihn jetzt automatisch los
-		if (isBallSticky && balls.length > 0) {
-			balls[0].dx = (Math.random() - 0.5) * 6;
-			balls[0].dy = -CFG.BALL_SPEED;
-			isBallSticky = false;
-		}
-		
+        // If the main ball is still stuck to the paddle, launch it automatically now
+        if (isBallSticky && balls.length > 0) {
+          balls[0].dx = (Math.random() - 0.5) * 6;
+          balls[0].dy = -CFG.BALL_SPEED;
+          isBallSticky = false;
+        }
         [...balls].forEach(b => {
           for (let k = 0; k < 2; k++)
             balls.push({ x:b.x, y:b.y, dx:(Math.random()-.5)*8, dy:-Math.abs(b.dy||CFG.BALL_SPEED), speed:b.speed });
@@ -871,10 +935,10 @@ function update() {
     if (pUp.y - CFG.PUP_R > CFG.H) powerUps.splice(i, 1);
   }
 
-  // 3. Ball-Physik
+  // 3. Ball physics
   for (let i = balls.length - 1; i >= 0; i--) {
     const ball = balls[i];
-    if (!isBallSticky || i > 0) { ball.x += ball.dx; ball.y += ball.dy; }
+    if (!isBallSticky || i > 0) { ball.x += ball.dx * dt; ball.y += ball.dy * dt; }
 
     if (ball.x - CFG.BALL_R <= 0)     { ball.x = CFG.BALL_R;          ball.dx = -ball.dx; }
     if (ball.x + CFG.BALL_R >= CFG.W) { ball.x = CFG.W - CFG.BALL_R;  ball.dx = -ball.dx; }
@@ -901,7 +965,11 @@ function update() {
       const b = bricks[j];
       if (ball.x+CFG.BALL_R > b.x && ball.x-CFG.BALL_R < b.x+b.width &&
           ball.y+CFG.BALL_R > b.y && ball.y-CFG.BALL_R < b.y+b.height) {
-        const prevY = ball.y - ball.dy;
+        // Determine bounce direction from the ball's previous position
+        // (must account for dt-scaled movement to correctly identify the
+        // side of impact, otherwise fast balls can tunnel/misjudge on
+        // high refresh-rate screens where dt < 1)
+        const prevY = ball.y - ball.dy * dt;
         if (prevY+CFG.BALL_R <= b.y || prevY-CFG.BALL_R >= b.y+b.height) ball.dy = -ball.dy;
         else ball.dx = -ball.dx;
         if (isComboEnabled) comboCount++;
@@ -923,9 +991,9 @@ function update() {
     if (ball.y - CFG.BALL_R > CFG.H) balls.splice(i, 1);
   }
 
-  // 4. Partikel
+  // 4. Particles
   for (let i = particles.length - 1; i >= 0; i--) {
-    const pt = particles[i]; pt.x += pt.dx; pt.y += pt.dy; pt.alpha -= pt.decay;
+    const pt = particles[i]; pt.x += pt.dx * dt; pt.y += pt.dy * dt; pt.alpha -= pt.decay * dt;
     if (pt.alpha <= 0) particles.splice(i, 1);
   }
 
@@ -1087,11 +1155,31 @@ function draw() {
 
 
 // ══════════════════════════════════════════════════════════════════════════════
-//  SECTION 14 – SPIELSCHLEIFE
+//  SECTION 14 – GAME LOOP
 // ══════════════════════════════════════════════════════════════════════════════
-function gameLoop() {
+
+// Tracks the timestamp of the previous frame so we can compute how much
+// real time actually passed. Reset to 0 whenever the loop (re)starts so the
+// very first frame after start/resume never produces a large dt jump.
+let lastFrameTime = 0;
+
+// Target: 60 FPS = 16.667ms per frame → dtFactor of 1.0 at 60Hz.
+// On a 120Hz phone, frames arrive twice as often, so dtFactor lands near 0.5,
+// keeping the ball's on-screen speed identical to a 60Hz display.
+// Clamped to 3 to avoid a huge single-frame jump after the tab was
+// backgrounded or the device was locked (which would otherwise let the ball
+// tunnel straight through the paddle or a wall).
+const FRAME_MS = 1000 / 60;
+
+function gameLoop(timestamp) {
   if (gameState === 'PLAYING') {
-    update(); draw(); requestAnimationFrame(gameLoop);
+    if (!lastFrameTime) lastFrameTime = timestamp;
+    const dt = Math.min(Math.max(timestamp - lastFrameTime, 0) / FRAME_MS, 3);
+    lastFrameTime = timestamp;
+
+    update(dt);
+    draw();
+    requestAnimationFrame(gameLoop);
   }
 }
 
