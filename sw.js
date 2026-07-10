@@ -1,4 +1,6 @@
-const CACHE_NAME = 'neon-breakout-v1';
+const CACHE_VERSION = 'v2'
+const CACHE_NAME = 'neon-breakout-${CACHE_VERSION}';
+
 const ASSETS = [
   './index.html',
   './manifest.json',
